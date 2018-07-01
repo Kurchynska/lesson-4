@@ -1,21 +1,13 @@
 package abc;
 
 public class ReverseString {
-    private String text = "Some text for revert";
 
-    public void reverString(String text){
-        String[] arrText = text.split("");
+    public String revertString(String string){
+        char[] arrText = string.toCharArray();
+        String revString = "";
         for(int i = arrText.length-1; i >= 0; i--){
-            System.out.print(arrText[i]);
+            revString+=arrText[i];
         }
-        System.out.println();
-    }
-
-    public void setText(String text) {
-        this.text = text;
-    }
-
-    public String getText() {
-        return text;
+        return revString;
     }
 }
