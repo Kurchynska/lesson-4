@@ -3,10 +3,10 @@ import java.util.Arrays;
 
 public class ArrayUnitTasksResults {
     public static void main(String[] args){
-        ReverseString reverseString = new ReverseString(); //Task 1: Revert string
+        ReverseString stringManager = new ReverseString(); //Task 1: Revert string
         String string = "Some text for revert";
-        String revString = reverseString.revertString(string);
-        System.out.println("Task 1: Revert string:\n" + string + "\nResult:\n" + revString);
+        String revertString = stringManager.reverseString(string);
+        System.out.println("Task 1: Revert string:\n" + string + "\nResult:\n" + revertString);
 
         ArrayManager arraySort = new ArrayManager();      //Task 2: Sort array ASC
         int[] numbers = {55,38,525,3,22};
