@@ -28,4 +28,18 @@ public class Student {
     public double getAverageMark() {
         return averageMark;
     }
+
+    @Override
+    public boolean equals(Object student) {
+        if(student==null)
+            return false;
+        else if(!(student instanceof Student))
+            return false;
+        else {
+            Student st = (Student)student;
+            return this.getName().equals(st.getName()) &&
+                    this.getSurname().equals(st.getSurname()) &&
+                    this.getAverageMark() == st.getAverageMark();
+        }
+    }
 }
