@@ -1,14 +1,14 @@
-package abc;
-import utils.IOStreamUtils;
+package abc.jb;
+import abc.utils.IOStreamUtils;
+import lombok.Data;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
 
+@Data
 public class Faculty extends EducationEntity {
 
     private List<Speciality> specialitiesList;
-    private IOStreamUtils stream = new IOStreamUtils();
     private Speciality speciality = new Speciality();
 
     public Faculty(){
@@ -21,12 +21,6 @@ public class Faculty extends EducationEntity {
         this.setName(name);
         this.specialitiesList = new ArrayList<Speciality>(specialities);
     }
-    public List<Speciality> getSpecialitiesList() {
-        return specialitiesList;
-    }
-    public void setSpecialitiesList(List<Speciality> specialitiesList) {
-        this.specialitiesList = new ArrayList<Speciality>(specialitiesList);
-    }
     public void addSpeciality(Speciality speciality){
         this.specialitiesList.add(speciality);
     }
@@ -35,7 +29,7 @@ public class Faculty extends EducationEntity {
         String facultyName;
         do{
             System.out.print("Enter faculty name or 'exit':");
-            facultyName = stream.readString();
+            facultyName = IOStreamUtils.readString();
             if(facultyName.equals("exit"))
                 break;
             else{
@@ -59,22 +53,5 @@ public class Faculty extends EducationEntity {
         else
             fiveBestStudents.addAll(students.subList(0,students.size()));
         return fiveBestStudents;
-    }
-    @Override
-    public boolean equals(Object obj) {
-        if(obj==null)
-            return false;
-        if(!(obj instanceof Faculty))
-            return false;
-        else{
-            Faculty faculty = (Faculty) obj;
-            return (getName().equals(faculty.getName())) &&
-                    (this.specialitiesList.containsAll(faculty.getSpecialitiesList()))  &&
-                    (this.specialitiesList.size()==faculty.getSpecialitiesList().size());
-        }
-    }
-    @Override
-    public int hashCode() {
-        return Objects.hash(getName(),this.specialitiesList);
     }
 }

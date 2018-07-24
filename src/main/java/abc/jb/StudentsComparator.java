@@ -1,4 +1,4 @@
-package abc;
+package abc.jb;
 import java.util.Comparator;
 
 public class StudentsComparator implements Comparator<Student> {

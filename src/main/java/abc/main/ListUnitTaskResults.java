@@ -1,9 +1,10 @@
-package abc;
+package abc.main;
+import abc.jb.Student;
+import abc.jb.University;
 
 public class ListUnitTaskResults {
     public static void main(String[] args) {
         Student student = new Student();
-
         University university = new University("KPI");
         university.setFacultiesList();
         System.out.println("Students with equal names: ");

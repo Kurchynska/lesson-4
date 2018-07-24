@@ -1,14 +1,14 @@
-package abc;
-import utils.IOStreamUtils;
+package abc.jb;
+import abc.utils.IOStreamUtils;
+import lombok.Data;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
 
-public class Speciality extends EducationEntity{
+@Data
+public class Speciality extends EducationEntity {
 
     private List<Group> groupsList;
-    private IOStreamUtils stream = new IOStreamUtils();
     private Group group = new Group();
 
     public Speciality(){
@@ -21,12 +21,6 @@ public class Speciality extends EducationEntity{
         this.setName(name);
         this.groupsList = new ArrayList<Group>(groups);
     }
-    public List<Group> getGroupsList() {
-        return groupsList;
-    }
-    public void setGroupsList(List<Group> groupsList) {
-        this.groupsList = new ArrayList<Group>(groupsList);
-    }
     public void addGroup(Group group){
         this.groupsList.add(group);
     }
@@ -35,7 +29,7 @@ public class Speciality extends EducationEntity{
         String specialityName;
         do{
             System.out.print("Enter speciality name or 'exit': ");
-            specialityName = stream.readString();
+            specialityName = IOStreamUtils.readString();
             if(specialityName.equals("exit"))
                 break;
             else{
@@ -58,22 +52,5 @@ public class Speciality extends EducationEntity{
         else
             fiveBestStudents.addAll(students.subList(0,students.size()));
         return fiveBestStudents;
-    }
-    @Override
-    public boolean equals(Object obj) {
-        if(obj==null)
-            return false;
-        if(!(obj instanceof Speciality))
-            return false;
-        else{
-            Speciality speciality = (Speciality) obj;
-            return (getName().equals(speciality.getName())) &&
-                    (this.groupsList.containsAll(speciality.getGroupsList()))  &&
-                    (this.groupsList.size()==speciality.getGroupsList().size());
-        }
-    }
-    @Override
-    public int hashCode() {
-        return Objects.hash(getName(),this.groupsList);
     }
 }

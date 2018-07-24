@@ -1,33 +1,21 @@
-package abc;
-import utils.IOStreamUtils;
+package abc.jb;
+import abc.utils.IOStreamUtils;
+import lombok.Data;
 import java.util.*;
 
+@Data
 public class University {
 
     private String name;
     private List<Faculty> facultiesList;
     private Faculty faculty = new Faculty();
     private Student student = new Student();
-    private IOStreamUtils stream = new IOStreamUtils();
 
     public University(){
     }
     public University(String name){
         this.name = name;
         this.facultiesList = new ArrayList<Faculty>();
-    }
-    public University(String name, List<Faculty> faculties){
-        this.name = name;
-        this.facultiesList = new ArrayList<Faculty>(faculties);
-    }
-    public void setName(String name) {
-        this.name = name;
-    }
-    public String getName() {
-        return name;
-    }
-    public List<Faculty> getFacultiesList() {
-        return facultiesList;
     }
     public void setFacultiesList() {
         this.facultiesList = new ArrayList<Faculty>(faculty.createEntityList());
@@ -131,7 +119,7 @@ public class University {
         for(Student student: fiveWorstStudents)
             worstStudentsSurnames.add(student.getSurname());
         for(int i = 0; i<number; i++ ){
-            surname = stream.readString();
+            surname = IOStreamUtils.readString();
             if(worstStudentsSurnames.contains(surname))
                 studentsSurnameList.add(surname);
             else{
@@ -168,29 +156,6 @@ public class University {
                     for(Student student : group.getStudentsList())
                         allStudents.add(student);
         return allStudents;
-    }
-
-    @Override
-    public String toString() {
-        return this.name;
-    }
-    @Override
-    public int hashCode() {
-        return Objects.hash(this.name,this.facultiesList);
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if(obj==null)
-            return false;
-        if(!(obj instanceof University))
-            return false;
-        else{
-            University unv = (University)obj;
-            return (this.name.equals(unv.getName())) &&
-                    (this.facultiesList.containsAll(unv.getFacultiesList())) &&
-                    (this.facultiesList.size() == unv.getFacultiesList().size());
-        }
     }
 }
 

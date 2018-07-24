@@ -1,14 +1,14 @@
-package abc;
-import utils.IOStreamUtils;
+package abc.jb;
+import abc.utils.IOStreamUtils;
+import lombok.Data;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
 
+@Data
 public class Group extends EducationEntity {
 
     private List<Student> studentsList;
-    private IOStreamUtils stream = new IOStreamUtils();
     private Student student = new Student();
 
     public Group(){
@@ -21,28 +21,22 @@ public class Group extends EducationEntity {
         setName(name);
         this.studentsList = new ArrayList<Student>(students);
     }
-    public List<Student> getStudentsList() {
-        return studentsList;
-    }
-    public void setStudentsList(List<Student> studentsList) {
-        this.studentsList = new ArrayList<Student>(studentsList);
-    }
     public void addStudent(Student student){
         studentsList.add(student);
     }
     public List<Group> createEntityList(){
         List<Group> groupsList = new ArrayList<Group>();
         String groupName;
-        while(true){
+        do{
             System.out.print("Enter group name or 'exit': ");
-            groupName = stream.readString();
+            groupName = IOStreamUtils.readString();
             if(groupName.equals("exit"))
                 break;
             else{
                 Group group = new Group(groupName, student.readStudentsList());
                 groupsList.add(group);
             }
-        }
+        }while(true);
         return groupsList;
     }
     public List<Student> findFiveBestStudents(){
@@ -55,22 +49,5 @@ public class Group extends EducationEntity {
         else
             fiveBestStudents.addAll(students.subList(0,students.size()));
         return fiveBestStudents;
-    }
-    @Override
-    public boolean equals(Object obj) {
-        if(obj==null)
-            return false;
-        if(!(obj instanceof Group))
-            return false;
-        else{
-            Group group = (Group)obj;
-            return (getName().equals(group.getName())) &&
-                    (this.studentsList.containsAll(group.getStudentsList()))  &&
-                    (this.studentsList.size()==group.getStudentsList().size());
-        }
-    }
-    @Override
-    public int hashCode() {
-        return Objects.hash(getName(),this.studentsList);
     }
 }
